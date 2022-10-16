@@ -5,58 +5,50 @@
     *******************************************************************************/
 
 #include <stdio.h>
+#include <math.h>
 #define K 3
 
-
-
 //struct apelido-------------------------------
-typedef struct ponto
-{
-  int x;
-  int y;
+typedef struct{
+	int x;
+	int y;
 } Ponto;
 
 //funcao para calcular distancia---------------------
-int calculaDistancia (int x1, int y1, int x2, int y2)
-{
-  return ((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
-}
+double calculadistancia(int x1, int y1,int x2,int y2){
+	return (sqrt(pow((x1-x2),2) + pow((y1-y2),2)));
+} 
+
 //---------------------
-int
-main ()
-{
+int main (){
 
 
   //typedef------------------------
-  Ponto pontos[3];
+ int i;
 
+	Ponto pontos[K];
+	pontos[0].x = -4; pontos[0].y = 7;
+	pontos[1].x = 2; pontos[1].y = -9;
+	pontos[2].x = 5; pontos[2].y = 3;
 
-  pontos[0].x = -4;
-  pontos[0].y = 7;
+    double soma = 0;
 
-  pontos[1].x = 2;
-  pontos[1].y = -9;
-
-  pontos[2].x = 5;
-  pontos[2].y = 3;
-
-//Calcula dittancia---------------------------
-  int dist = 0;
-
-  dist = calculaDistancia (pontos[0].x, pontos[0].y, pontos[1].x, pontos[1].y);
-  printf ("Distancia = %d\n\n", dist);
 
 
 //Ver pontos acima da reta X------------------------
-  for (int i = 0; i < K; i++)
-    {
-      if (pontos[i].y > 0)
-	{
-	  printf ("Ponto %d (x = %d y = %d)  PONTO ACIMA DA RETA X\n", i, pontos[i].x, pontos[i].y);
-	}
-	else{
-	    printf ("Ponto %d (x = %d y = %d)  PONTO ABAIXO DA RETA X\n", i, pontos[i].x, pontos[i].y);
-	}
+
+    	soma += calculadistancia(pontos[0].x,pontos[0].y,pontos[1].x,pontos[1].y);
+	soma += calculadistancia(pontos[1].x,pontos[1].y,pontos[2].x,pontos[2].y);
+	soma += calculadistancia(pontos[2].x,pontos[2].y,pontos[0].x,pontos[0].y);
+	
+	printf("%2.lf", soma);
+	
+	
+  for(i=0;i<=K;i++){
+		if (pontos[i].y > 0){
+			printf("\nPonto acima da reta, coordenadas:");
+			printf("\nX: %d",pontos[i].x);
+			printf("\nY: %d",pontos[i].y);
+        }
     }
-  return 0;
 }
